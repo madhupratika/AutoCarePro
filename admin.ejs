@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoCarePro - Admin</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+
+    <h2>Booking Slots</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Vehicle Type</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Customer</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Car</td>
+          <td>2023-06-15</td>
+          <td>10:00 AM</td>
+          <td>John Doe</td>
+          <td>Pending</td>
+          <td>
+            <select>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Users List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>john@example.com</td>
+          <td>1234567890</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

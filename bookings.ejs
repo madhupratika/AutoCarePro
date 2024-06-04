@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoCarePro - Bookings</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container">
+    <h1>Bookings</h1>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="new-booking">New Booking</button>
+      <button class="tab-btn" data-tab="booking-history">Booking History</button>
+      <button class="tab-btn" data-tab="edit-booking">Edit Booking</button>
+    </div>
+
+    <div class="tab-content" id="new-booking">
+      <h2>New Booking</h2>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="vehicleType">Vehicle Type</label>
+          <select id="vehicleType" name="vehicleType">
+            <option value="car">Car</option>
+            <option value="bike">Bike</option>
+            <option value="auto">Auto</option>
+            <option value="bus">Bus</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date">
+        </div>
+        <div class="form-group">
+          <label for="time">Time</label>
+          <input type="time" id="time" name="time">
+        </div>
+        <button type="submit" class="btn">Book Now</button>
+      </form>
+    </div>
+
+    <div class="tab-content" id="booking-history" style="display: none;">
+      <h2>Booking History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Vehicle Type</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% bookings.forEach(booking => { %>
+            <tr>
+              <td><%= booking._id %></td>
+              <td><%= booking.vehicleType %></td>
+              <td><%= booking.date.toLocaleDateString() %></td>
+              <td><%= booking.time %></td>
+              <td>
+                <a href="#" class="btn edit-booking-btn" data-booking-id="<%= booking._id %>">Edit</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-content" id="edit-booking" style="display: none;">
+      <h2>Edit Booking</h2>
+      <form id="editBookingForm">
+        <div class="form-group">
+          <label for="bookingId">Booking ID</label>
+          <input type="text" id="bookingId" name="bookingId" required disabled>
+        </div>
+        <div class="form-group">
+          <label for="vehicleType">Vehicle Type</label>
+          <select id="vehicleType" name="vehicleType">
+            <option value="car">Car</option>
+            <option value="bike">Bike</option>
+            <option value="auto">Auto</option>
+            <option value="bus">Bus</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date">
+        </div>
+        <div class="form-group">
+          <label for="time">Time</label>
+          <input type="time" id="time" name="time">
+        </div>
+        <button type="submit" class="btn">Update Booking</button>
+      </form>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+  <script src="/js/app.js"></script>
+  <script>
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const editBookingBtns = document.querySelectorAll('.edit-booking-btn');
+    const editBookingForm = document.getElementById('editBookingForm');
+    const bookingIdInput = document.getElementById('bookingId');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.dataset.tab;
+        tabBtns.forEach(btn => btn.classList.remove('active'));
+        btn.classList.add('active');
+        tabContents.forEach(content => content.style.display = 'none');
+        document.getElementById(targetTab).style.display = 'block';
+      });
+    });
+
+    editBookingBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const bookingId = btn.dataset.bookingId;
+        bookingIdInput.value = bookingId;
+        document.querySelector('.tab-btn[data-tab="edit-booking"]').click();
+      });
+    });
+  </script>
+</body>
+</html>

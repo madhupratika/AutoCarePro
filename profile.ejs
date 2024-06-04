@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoCarePro - Profile</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container">
+    <h1>Profile</h1>
+    <div class="profile-info">
+      <p><strong>Name:</strong> <%= user.name %></p>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <p><strong>Phone:</strong> <%= user.phone %></p>
+    </div>
+    <a href="/editProfile" class="btn">Edit Profile</a>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
